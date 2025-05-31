@@ -6,9 +6,9 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg navbar-dark">
         <div class="container-fluid">
-            <a class="navbar-brand" href="/">Surveys</a>
+            <a class="navbar-brand" href="/">Lifestyle Surveys</a>
             <div class="navbar-nav">
                 <a class="nav-link" href="/survey">Fill Out Survey</a>
                 <a class="nav-link active" href="/results">View Survey Results</a>
@@ -16,6 +16,7 @@
         </div>
     </nav>
     <div class="container mt-4">
+        <img src="{{ url_for('static', filename='Pasta1.jpg') }}" class="img-fluid header-image mb-3" alt="Survey Results Header">
         <h1>Survey Results</h1>
         {% if no_data %}
             <div class="alert alert-info" role="alert">
@@ -41,15 +42,24 @@
                 </tr>
                 <tr>
                     <th>Percentage of People Who Like Pizza:</th>
-                    <td>{{ food_percentages['Pizza'] }}%</td>
+                    <td>
+                        <img src="{{ url_for('static', filename='Pizza1.jpg') }}" class="results-image" alt="Pizza"> 
+                        {{ food_percentages['Pizza'] }}%
+                    </td>
                 </tr>
                 <tr>
                     <th>Percentage of People Who Like Pasta:</th>
-                    <td>{{ food_percentages['Pasta'] }}%</td>
+                    <td>
+                        <img src="{{ url_for('static', filename='Pasta2.jpg') }}" class="results-image" alt="Pasta"> 
+                        {{ food_percentages['Pasta'] }}%
+                    </td>
                 </tr>
                 <tr>
                     <th>Percentage of People Who Like Pap and Wors:</th>
-                    <td>{{ food_percentages['Pap and Wors'] }}%</td>
+                    <td>
+                        <img src="{{ url_for('static', filename='PaW2.jpg') }}" class="results-image" alt="Pap and Wors"> 
+                        {{ food_percentages['Pap and Wors'] }}%
+                    </td>
                 </tr>
                 <tr>
                     <th>Percentage of People Who Like Other:</th>

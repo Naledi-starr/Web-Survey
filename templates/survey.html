@@ -6,9 +6,9 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg navbar-dark">
         <div class="container-fluid">
-            <a class="navbar-brand" href="/">Surveys</a>
+            <a class="navbar-brand" href="/">Lifestyle Surveys</a>
             <div class="navbar-nav">
                 <a class="nav-link active" href="/survey">Fill Out Survey</a>
                 <a class="nav-link" href="/results">View Survey Results</a>
@@ -16,6 +16,7 @@
         </div>
     </nav>
     <div class="container mt-4">
+        <img src="{{ url_for('static', filename='PaW2.jpg') }}" class="img-fluid header-image mb-3" alt="Survey Header">
         <h1>Fill Out Survey</h1>
         {% with messages = get_flashed_messages(with_categories=true) %}
             {% if messages %}
@@ -45,20 +46,29 @@
                 <input type="text" class="form-control" id="contact_number" name="contact_number" required>
             </div>
             <h3>Favorite Food</h3>
-            <div class="mb-3">
-                <div class="form-check">
+            <div class="mb-3 d-flex align-items-center">
+                <div class="form-check me-3">
                     <input type="checkbox" class="form-check-input" id="pizza" name="favorite_foods" value="Pizza">
                     <label class="form-check-label" for="pizza">Pizza</label>
                 </div>
-                <div class="form-check">
+                <img src="{{ url_for('static', filename='Pizza2.jpg') }}" class="food-image" alt="Pizza">
+            </div>
+            <div class="mb-3 d-flex align-items-center">
+                <div class="form-check me-3">
                     <input type="checkbox" class="form-check-input" id="pasta" name="favorite_foods" value="Pasta">
                     <label class="form-check-label" for="pasta">Pasta</label>
                 </div>
-                <div class="form-check">
+                <img src="{{ url_for('static', filename='Pasta2.jpg') }}" class="food-image" alt="Pasta">
+            </div>
+            <div class="mb-3 d-flex align-items-center">
+                <div class="form-check me-3">
                     <input type="checkbox" class="form-check-input" id="pap_and_wors" name="favorite_foods" value="Pap and Wors">
                     <label class="form-check-label" for="pap_and_wors">Pap and Wors</label>
                 </div>
-                <div class="form-check">
+                <img src="{{ url_for('static', filename='PaW1.jpg') }}" class="food-image" alt="Pap and Wors">
+            </div>
+            <div class="mb-3 d-flex align-items-center">
+                <div class="form-check me-3">
                     <input type="checkbox" class="form-check-input" id="other" name="favorite_foods" value="Other">
                     <label class="form-check-label" for="other">Other</label>
                 </div>
@@ -101,7 +111,7 @@
                     </div>
                 {% endfor %}
             </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" class="btn btn-dark">Submit</button>
         </form>
     </div>
     <script>
