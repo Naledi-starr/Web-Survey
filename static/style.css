@@ -2,11 +2,28 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 20px;
+    background-color: #f8f9fa;
 }
 .container {
     max-width: 800px;
     margin: auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 .form-check {
     margin-bottom: 10px;
+}
+h1, h3 {
+    color: #343a40;
+}
+.navbar {
+    margin-bottom: 20px;
+}
+.table th, .table td {
+    vertical-align: middle;
+}
+.alert {
+    margin-top: 10px;
 }
