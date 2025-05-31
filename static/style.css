@@ -7,3 +7,6 @@ body {
     max-width: 800px;
     margin: auto;
 }
+.form-check {
+    margin-bottom: 10px;
+}
