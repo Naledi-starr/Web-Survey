@@ -75,7 +75,49 @@ def survey():
 
 @app.route('/results')
 def results():
-    return render_template('results.html')
+    conn = get_db_connection()
+    surveys = conn.execute('SELECT * FROM surveys').fetchall()
+    total_surveys = len(surveys)
+    
+    if total_surveys == 0:
+        conn.close()
+        return render_template('results.html', no_data=True)
+    
+    # Calculate ages
+    ages = []
+    for survey in surveys:
+        dob = datetime.strptime(survey['date_of_birth'], '%Y-%m-%d')
+        age = (datetime.now() - dob).days / 365.25
+        ages.append(age)
+    
+    avg_age = round(sum(ages) / total_surveys, 1) if ages else 0
+    oldest_age = round(max(ages), 1) if ages else 0
+    youngest_age = round(min(ages), 1) if ages else 0
+    
+    # Calculate food percentages
+    food_counts = {'Pizza': 0, 'Pasta': 0, 'Pap and Wors': 0, 'Other': 0}
+    for survey in surveys:
+        foods = survey['favorite_foods'].split(',') if survey['favorite_foods'] else []
+        for food in foods:
+            if food in food_counts:
+                food_counts[food] += 1
+    
+    food_percentages = {
+        food: round((count / total_surveys) * 100, 1) for food, count in food_counts.items()
+    }
+    
+    # Calculate average ratings
+    avg_ratings = {
+        'movies': round(sum(survey['movies_rating'] for survey in surveys) / total_surveys, 1),
+        'radio': round(sum(survey['radio_rating'] for survey in surveys) / total_surveys, 1),
+        'eating_out': round(sum(survey['eating_out_rating'] for survey in surveys) / total_surveys, 1),
+        'tv': round(sum(survey['tv_rating'] for survey in surveys) / total_surveys, 1)
+    }
+    
+    conn.close()
+    return render_template('results.html', no_data=False, total_surveys=total_surveys,
+                          avg_age=avg_age, oldest_age=oldest_age, youngest_age=youngest_age,
+                          food_percentages=food_percentages, avg_ratings=avg_ratings)
 
 if __name__ == '__main__':
     app.run(debug=True)
